@@ -131,7 +131,7 @@ let vScoreO = {
   scoreFunction: vowelScore,
   };
 let sScoreO = {
-  name: 'Simple'
+  name: 'Simple',
   description: "Each letters is worth 1 point.",
   scoreFunction: simpleScore,
   };
