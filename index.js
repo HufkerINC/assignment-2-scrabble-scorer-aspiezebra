@@ -55,7 +55,7 @@ let newPointStructure;
 function runProgram() {
    initialPrompt();
   //  oldScrabbleScorer(word)
-  console.log(oldScrabbleScorer(word))
+   console.log(oldScrabbleScorer(word))
    
 }
 
