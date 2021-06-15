@@ -1,6 +1,7 @@
 // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
 
 const input = require("readline-sync");
+// let letterPoints = 0
 let word = ""
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
@@ -14,7 +15,7 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let letterPoints = "";
+	letterPoints = "";
  
 	for (let i = 0; i < word.length; i++) {
  
@@ -33,60 +34,27 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   word = input.question("Let's play some scrabble! Enter a word: ");
+   //console.log("Let's play some scrabble! Enter a word:");
+   word = input.question("Let's play some scrabble! Enter a word: ")
 };
 
-let simplescore = 0;
-function simpleScore (word) {
-  simplescore = word.length;
-  return simplescore;
-}
+let simpleScore;
 
-let vowelbonusscore = 0;
-function vowelBonusScore (word) {
-  
-  let vowel = ["a" , "e" , "i" , "o" , "u" , "y"];
-  for (let i = 0; i < word.length; i++) {
-    if (vowel.includes(word[i])) {
-      vowelbonusscore = vowelbonusscore + 3;
-    } else {
-      vowelbonusscore = vowelbonusscore + 1;
-    }
-  }
-  return vowelbonusscore;
-  }
+let vowelBonusScore;
 
-let scrabblescore = 0;
-function scrabbleScore (word, object) {
-  scrabblescore = 0;
-  for (let i = 0; i < word.length; i++) {
-    if (Object.keys(newPointStructure).includes(word[i])) {
-      scrabblescore = scrabblescore + newPointStructure[word[i]];
-    } 
-    
-  }
-  return scrabblescore;
-}
+let scrabbleScore;
 
-const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
+const scoringAlgorithms = [];
 
 function scorerPrompt() {}
 
-function transform(letterScore) {
- const transform = {};
-  for (let score in letterScore) {
-    let letters = letterScore[score];
-    for (let i = 0; i < letters.length; i++) {
-      transform[letters[i].toLowerCase()] = Number(score);
-    }
-  }
-  return transform;
-};
+function transform() {};
 
-let newPointStructure = transform(oldPointStructure);
+let newPointStructure;
 
 function runProgram() {
    initialPrompt();
+  //  oldScrabbleScorer(word)
    console.log(oldScrabbleScorer(word))
    
 }
