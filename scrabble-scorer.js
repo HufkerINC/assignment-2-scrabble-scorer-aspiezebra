@@ -40,12 +40,12 @@ function initialPrompt() {
   //  return word;
 };
 let score = 0
-function simpleSCore() {
+let simpleScore = function(word) {
   
   score = 0
   score = word.length;
 }
-function vowelBonusSCore(word) {
+let vowelBonusScore = function(word) {
   word = word.toUpperCase()
   score = 0
   let vowels = ["A", "E", "I", "O", "U", "Y"];
@@ -59,35 +59,38 @@ function vowelBonusSCore(word) {
   }
   return score;
 }
-function scrabbleSCore(word, object) {
+let scrabbleScore = function (word, object) {
   
   score = 0
   for(let i = 0; i < word.length; i++) {
     if (Object.keys(newPointStructure).includes(word[i])){
-      score = score + newPointStructure[word[i]];
+      score = score + newPointStructure[word[i].toLowerCase()];
     }
   }
   return score;
 }
-let simpleScore ={
+
+const scoringAlgorithms = [
+  {
   name: "Simple score",
   description: "Each letters is worth 1 point.",
-  scoreFunction: simpleSCore,
-};
+  scoreFunction: simpleScore,
+  },
 
-let vowelBonusScore = {
+ {
   name: "Vowel Bonus Score",
   description: "Vowels are 3 pts, consonants are 1 pt.",
-  scoreFunction: vowelBonusSCore,
-};
+  scoreFunction: vowelBonusScore,
+  },
 
-let scrabbleScore = {
+ {
   name: "Scrabble",
   description: "The traditional scoring algorithm.",
-  scoreFunction: scrabbleSCore,
-};
+  scoreFunction: scrabbleScore,
+  },
 
-const scoringAlgorithms = [scrabbleScore, vowelBonusScore, simpleScore];
+
+];
 
 function scorerPrompt() {
   introNum = input.question(`Welcome to the Scrabble score calculator!
@@ -124,7 +127,7 @@ function runProgram(score) {
    while (true) {
     // word = input.question(`Enter a word to score(Typing 'St0p' will end the program): `)
     // console.log(scorerPrompt(introNum))
-    // console.log(simpleSCore(score))
+    // console.log(simpleScore(score))
     word = word.toLowerCase();
     if (word == "st0p") {
       console.log("Goodbye");
@@ -139,14 +142,14 @@ function runProgram(score) {
       console.log(`using algorithm ${scoringAlgorithms[0].name}`);
       console.log(word);
       
-      console.log(`Is worth ${scrabbleSCore(word, newPointStructure)} points`);
+      console.log(`Is worth ${scrabbleScore(word, newPointStructure)} points`);
       
     } else if (introNum === 1) {
       //console.log(initialPrompt);
       console.log(`Using algorithm ${scoringAlgorithms[1].name}`);
       console.log(word);
-      // console.log(scrabbleSCore(score))
-      console.log(`Is worth ${simpleSCore(word)} points`);
+      // console.log(scrabbleScore(score))
+      console.log(`Is worth ${simpleScore(word)} points`);
 
       
       
@@ -155,7 +158,7 @@ function runProgram(score) {
       // console.log(initialPrompt)
       console.log(`Using algorithm: ${scoringAlgorithms[2].name}`)
       // console.log(word);
-      console.log(`Is worth ${vowelBonusSCore(word)} points`)
+      console.log(`Is worth ${vowelBonusScore(word)} points`)
       
       
     }
