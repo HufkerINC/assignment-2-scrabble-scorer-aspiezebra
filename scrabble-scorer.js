@@ -41,8 +41,6 @@ function initialPrompt() {
 };
 let score = 0
 let simpleScore = function(word) {
-  
-  score = 0
   score = word.length;
 }
 let vowelBonusScore = function(word) {
