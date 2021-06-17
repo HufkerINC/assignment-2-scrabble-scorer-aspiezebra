@@ -30,34 +30,139 @@ function oldScrabbleScorer(word) {
 	return letterPoints;
  }
 
+let introNum = 0
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
    //console.log("Let's play some scrabble! Enter a word:");
-   word = input.question("Let's play some scrabble! Enter a word: ")
+   word = input.question("Enter a word to score(Typing 'St0p' will end the program): ")
+  //  return word;
+};
+let score = 0
+function simpleSCore() {
+  
+  score = 0
+  score = word.length;
+}
+function vowelBonusSCore(word) {
+  word = word.toUpperCase()
+  score = 0
+  let vowels = ["A", "E", "I", "O", "U", "Y"];
+  // let vowels = ["A", "E", "I", "O", "U"];
+  for(i = 0; i < word.length; i++){
+    if(vowels.includes(word[i])) {
+      score = score + 3
+    } else {
+      score = score + 1
+    }
+  }
+  return score;
+}
+function scrabbleSCore(word, object) {
+  
+  score = 0
+  for(let i = 0; i < word.length; i++) {
+    if (Object.keys(newPointStructure).includes(word[i])){
+      score = score + newPointStructure[word[i]];
+    }
+  }
+  return score;
+}
+let simpleScore ={
+  name: "Simple score",
+  description: "Each letters is worth 1 point.",
+  scoreFunction: simpleSCore,
 };
 
-let simpleScore;
+let vowelBonusScore = {
+  name: "Vowel Bonus Score",
+  description: "Vowels are 3 pts, consonants are 1 pt.",
+  scoreFunction: vowelBonusSCore,
+};
 
-let vowelBonusScore;
+let scrabbleScore = {
+  name: "Scrabble",
+  description: "The traditional scoring algorithm.",
+  scoreFunction: scrabbleSCore,
+};
 
-let scrabbleScore;
+const scoringAlgorithms = [scrabbleScore, vowelBonusScore, simpleScore];
 
-const scoringAlgorithms = [];
+function scorerPrompt() {
+  introNum = input.question(`Welcome to the Scrabble score calculator!
 
-function scorerPrompt() {}
+Which scoring algorithm would you like to use?
 
-function transform() {};
+0 - Scrabble: The traditional scoring algorithm.
+1 - Simple Score: Each letter is worth 1 point.
+2 - Bonus Vowels: Vowels are worth 3 pts, and consonants are 1 pt.
 
-let newPointStructure;
-
-function runProgram() {
-   initialPrompt();
-  //  oldScrabbleScorer(word)
-   console.log(oldScrabbleScorer(word))
-   
+Enter 0, 1, or 2:`);
+  return introNum;
 }
+
+function transform(letterScore) {
+  const tS ={};
+  for(let score in letterScore){
+    let letters = letterScore[score];
+    for (let i = 0; i < letters.length; i++){
+      tS[letters[i].toLowerCase()] =Number(score);
+    }
+  }
+  return tS;
+};
+
+let newPointStructure = transform(oldPointStructure);
+
+function runProgram(score) {
+   initialPrompt(word);
+  //  oldScrabbleScorer(word)
+  //  console.log(oldScrabbleScorer(word))
+  //  console.log(scorerPrompt(introNum))
+  // console.log(scorerPrompt(introNum))
+   while (true) {
+    // word = input.question(`Enter a word to score(Typing 'St0p' will end the program): `)
+    // console.log(scorerPrompt(introNum))
+    // console.log(simpleSCore(score))
+    word = word.toLowerCase();
+    if (word == "st0p") {
+      console.log("Goodbye");
+      break;
+    }
+
+    // scorerPrompt(introNum)
+    
+    
+      if (introNum === 0) {
+        // console.log(initialPrompt);
+      console.log(`using algorithm ${scoringAlgorithms[0].name}`);
+      console.log(word);
+      
+      console.log(`Is worth ${scrabbleSCore(word, newPointStructure)} points`);
+      
+    } else if (introNum === 1) {
+      //console.log(initialPrompt);
+      console.log(`Using algorithm ${scoringAlgorithms[1].name}`);
+      console.log(word);
+      // console.log(scrabbleSCore(score))
+      console.log(`Is worth ${simpleSCore(word)} points`);
+
+      
+      
+
+    } else if (introNum === 2) {
+      // console.log(initialPrompt)
+      console.log(`Using algorithm: ${scoringAlgorithms[2].name}`)
+      // console.log(word);
+      console.log(`Is worth ${vowelBonusSCore(word)} points`)
+      
+      
+    }
+    }
+  }
+
+
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
