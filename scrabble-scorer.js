@@ -318,11 +318,7 @@ function runProgram(score) {
 }
 }
 
-Simple Score	Each letter is worth 1 point.
 
-Bonus Vowels	Vowels are 3 pts, consonants are 1 pt.	A function that returns a score based on the number of vowels and consonants.
-
-Scrabble	The traditional scoring algorithm.	Uses the oldScrabbleScorer() function to determine the score for a given word.
 module.exports = {
     initialPrompt: initialPrompt,
     transform: transform,
