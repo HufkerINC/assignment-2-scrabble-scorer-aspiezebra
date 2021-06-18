@@ -161,8 +161,8 @@
 // };
 
 const input = require("readline-sync");
-let letterPoints = ""
-let word = "";
+let letterPoints = " "
+let word = " ";
 const oldPointStructure = {
     1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
     2: ['D', 'G'],
@@ -175,7 +175,7 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
     word = word.toUpperCase();
-    letterPoints = "";
+    letterPoints = " ";
 
     for (let i = 0; i < word.length; i++) {
 
@@ -208,7 +208,8 @@ let vowelBonusScore = function (word) {
 
     word = word.toUpperCase();
     score = 0;
-    let vowels = ["A", "E", "I", "O", "U", "Y"];
+    // let vowels = ["A", "E", "I", "O", "U", "Y"];
+     let vowels = ["A", "E", "I", "O", "U"];
     for (let i = 0; i < word.length; i++) {
         if (vowels.includes(word[i])) {
             score = score + 3;
@@ -286,7 +287,7 @@ function runProgram(score) {
     if (word == "st0p") {
         console.log("Goodbye");
     }
-    while(word != "st0p"){
+    while(word !== "st0p"){
       // console.log(`Using algorithm: ${scoringAlgorithms[introNum].name}`);
       //   console.log(`Is worth ${scoreFunction[introNum](word)} points`);
         // initialPrompt();
