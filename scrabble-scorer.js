@@ -236,11 +236,13 @@ const scoringAlgorithms = [
         name: 'Scrabble',
         description: 'The traditional scoring algorithm.',
         scoreFunction: scrabbleScore,
-    }, {
+    },
+    {
         name: 'Simple score',
         description: 'Each letters is worth 1 point.',
         scoreFunction: simpleScore,
-    }, {
+    },
+    {
         name: 'Vowel Bonus Score',
         description: 'Vowels are 3 pts, consonants are 1 pt.',
         scoreFunction: vowelBonusScore
